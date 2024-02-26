@@ -8,6 +8,10 @@
         <AssemblyVersion>$(ProductVersion)</AssemblyVersion>
         <FileVersion>$(ProductVersion)</FileVersion>
         <Version>$(ProductVersion)</Version>
+        <Title>Gbs</Title>
+        <Authors>https://github.com/asv-soft</Authors>
+        <Description>Ground base station plugin for Asv.Drones GUI application</Description>
+        <Copyright>https://github.com/asv-soft</Copyright>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
