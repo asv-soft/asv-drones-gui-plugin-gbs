@@ -5,10 +5,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyVersion>$(ProductVersion)</AssemblyVersion>
+        <FileVersion>$(ProductVersion)</FileVersion>
+        <Version>$(ProductVersion)</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>D:\asv\prj\asv-drones-gui\src\Asv.Drones.Gui.Desktop\bin\Debug\net8.0\asv-data-folder\plugins\asv.drones.gui.plugin.gbs</OutputPath>
+      <OutputPath>..\..\..\asv-drones-gui\src\Asv.Drones.Gui.Desktop\bin\Debug\net8.0\asv-data-folder\plugins\asv.drones.gui.plugin.gbs</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
