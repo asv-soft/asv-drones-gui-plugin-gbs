@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <OutputPath>D:\asv\prj\asv-drones-gui\src\Asv.Drones.Gui.Desktop\bin\Debug\net8.0\asv-data-folder\plugins\asv.drones.gui.plugin.gbs</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Asv.Drones.Gui.Api" Version="0.1.1" />
+        <PackageReference Include="ReactiveUI.Fody" Version="$(ReactiveUIVersion)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Shell\Pages\Flight\Widgets\" />
+      <Folder Include="Shell\Pages\Settings\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="RS.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RS.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="RS.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>RS.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>
