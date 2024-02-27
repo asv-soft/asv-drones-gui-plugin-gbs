@@ -10,8 +10,13 @@
         <Version>$(ProductVersion)</Version>
         <Title>Gbs</Title>
         <Authors>https://github.com/asv-soft</Authors>
-        <Description>Ground base station plugin for Asv.Drones GUI application</Description>
+        <Description>Asv.Drones GUI application plugin
+for displaying and configuring Ground Base Station devices.</Description>
         <Copyright>https://github.com/asv-soft</Copyright>
+        <PackageProjectUrl>https://github.com/asv-soft/asv-drones-gui-plugin-gbs</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/asv-soft/asv-drones-gui-plugin-gbs?tab=MIT-1-ov-file#readme</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/asv-soft/asv-drones-gui-plugin-gbs</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
