@@ -15,7 +15,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>..\..\..\asv-drones-gui\src\Asv.Drones.Gui.Desktop\bin\Debug\net8.0\asv-data-folder\plugins\asv.drones.gui.plugin.gbs</OutputPath>
+      <OutputPath>..\..\..\asv-drones-gui\src\Asv.Drones.Gui.Desktop\bin\Debug\net8.0\asv-data-folder\plugins\Asv.Drones.Gui.Plugin.Gbs\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,7 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Shell\Pages\Flight\Widgets\" />
       <Folder Include="Shell\Pages\Settings\" />
     </ItemGroup>
 
