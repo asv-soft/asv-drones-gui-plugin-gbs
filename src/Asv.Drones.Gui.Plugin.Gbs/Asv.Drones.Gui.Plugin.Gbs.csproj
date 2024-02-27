@@ -19,7 +19,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Asv.Drones.Gui.Api" Version="0.1.1" />
+      <PackageReference Include="Asv.Drones.Gui.Api" Version="$(ApiVersion)" />
         <PackageReference Include="ReactiveUI.Fody" Version="$(ReactiveUIVersion)" />
     </ItemGroup>
 
