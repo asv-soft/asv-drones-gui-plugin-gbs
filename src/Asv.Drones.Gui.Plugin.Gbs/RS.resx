@@ -226,4 +226,7 @@
     <data name="AddNewMapPointView_Latitude_Name" xml:space="preserve">
     <value>Latitude</value>
   </data>
+    <data name="GbsParamsMenu_GbsParamsMenu_Settings" xml:space="preserve">
+        <value>Settings</value>
+    </data>
 </root>

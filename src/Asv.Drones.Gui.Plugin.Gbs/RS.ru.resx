@@ -226,5 +226,16 @@
     <data name="AddNewMapPointView_Longitude_Name" xml:space="preserve">
 	  <value>Долгота</value>
   </data>
-   
+    <data name="GbsParamsMenu_GbsParamsMenu_Settings" xml:space="preserve">
+        <value>Параметры</value>
+    </data>
+    <data name="GbsRttItem_ValueNotAvailable" xml:space="preserve">
+        <value>N\A</value>
+    </data>
+    <data name="SavedCoordsViewModel_AddNewItem_CloseButtonText" xml:space="preserve">
+        <value>Отмена</value>
+    </data>
+    <data name="SavedCoordsViewModel_AddNewItem_PrimaryButtonText" xml:space="preserve">
+        <value>Добавить</value>
+    </data>
 </root>

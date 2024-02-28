@@ -483,6 +483,15 @@ namespace Asv.Drones.Gui.Plugin.Gbs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string GbsParamsMenu_GbsParamsMenu_Settings {
+            get {
+                return ResourceManager.GetString("GbsParamsMenu_GbsParamsMenu_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to N\A.
         /// </summary>
         public static string GbsRttItem_ValueNotAvailable {
