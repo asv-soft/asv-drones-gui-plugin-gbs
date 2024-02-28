@@ -22,7 +22,7 @@ rem build all projects
   	echo %%p
 	dotnet restore ./src/%%p/%%p.csproj
 	dotnet build /p:SolutionDir=../;ProductVersion=%VERSION% ./src/%%p/%%p.csproj -c Release
-	dotnet pack ./src/%%p/%%p.csproj -c Release
+	dotnet pack /p:SolutionDir=../;ProductVersion=%VERSION% ./src/%%p/%%p.csproj -c Release
 )) 
 pause
 
