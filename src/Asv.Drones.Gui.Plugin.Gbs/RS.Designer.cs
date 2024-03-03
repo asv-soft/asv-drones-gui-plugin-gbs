@@ -114,7 +114,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accuracy must be greater or equal {0}..
+        ///   Looks up a localized string similar to Accuracy must be greater than {0}..
         /// </summary>
         public static string AddNewMapPointViewModel_Accuracy_ValidValue {
             get {

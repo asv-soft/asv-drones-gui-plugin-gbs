@@ -69,7 +69,7 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
 
     public void ApplyDialog(ContentDialog dialog)
     {
-        if (dialog == null) throw new ArgumentNullException(nameof(dialog));
+        ArgumentNullException.ThrowIfNull(dialog);
 
         dialog.PrimaryButtonCommand = ReactiveCommand
             .Create(AddItem, this.IsValid().Do(_ => dialog.IsPrimaryButtonEnabled = _))
@@ -99,9 +99,9 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
     [Reactive]
     public string Altitude { get; set; } = "0";
     [Reactive]
-    public string Accuracy { get; set; } = "0";
+    public string Accuracy { get; set; } = "0.01";
     [Reactive]
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public string AccuracyUnits => _loc.Distance.CurrentUnit.Value.Unit;
     public string LatitudeUnits => _loc.Latitude.CurrentUnit.Value.Unit;
     public string LongitudeUnits => _loc.Longitude.CurrentUnit.Value.Unit;

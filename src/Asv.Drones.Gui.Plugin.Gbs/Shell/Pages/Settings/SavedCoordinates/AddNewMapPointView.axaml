@@ -12,18 +12,18 @@
     <Design.DataContext>
         <gbs:AddNewMapPointViewModel />
     </Design.DataContext>
-    <Grid Margin="10" RowDefinitions="75 50 75 50 75 50 75 50 75">
+    <Grid Margin="10" RowDefinitions="* 5 * 5 * 5 * 5 *">
         <Grid.ColumnDefinitions>
             <ColumnDefinition SharedSizeGroup="Icon" Width="Auto" />
             <ColumnDefinition SharedSizeGroup="Name" Width="Auto" />
             <ColumnDefinition SharedSizeGroup="Input" Width="350" />
         </Grid.ColumnDefinitions>
         <avalonia:MaterialIcon Kind="Rename" />
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Point_Name}" VerticalAlignment="Center" Margin="5 0 0 0" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Point_Name}" VerticalAlignment="Center" Margin="5 0 5 0" />
         <TextBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Name}" />
         
         <avalonia:MaterialIcon Grid.Row="2" Grid.Column="0"  Kind="Target" />
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Latitude_Name}" VerticalAlignment="Center" Margin="5 0 0 0" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Latitude_Name}" VerticalAlignment="Center" Margin="5 0 5 0" />
         <TextBox Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Latitude}">
             <TextBox.Styles>
                 <Style Selector="TextBox">
@@ -37,7 +37,7 @@
         </TextBox>
         
         <avalonia:MaterialIcon Grid.Row="4" Grid.Column="0" Kind="Target" />
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Longitude_Name}" VerticalAlignment="Center" Margin="5 0 0 0" />
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Longitude_Name}" VerticalAlignment="Center" Margin="5 0 5 0" />
         <TextBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Longitude}">
             <TextBox.Styles>
                 <Style Selector="TextBox">
@@ -51,7 +51,7 @@
         </TextBox>
         
         <avalonia:MaterialIcon Grid.Row="6" Grid.Column="0" Kind="Target" />
-        <TextBlock Grid.Row="6" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Altitude_Name}" VerticalAlignment="Center" Margin="5 0 0 0" />
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Altitude_Name}" VerticalAlignment="Center" Margin="5 0 5 0" />
         <TextBox Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Altitude}">
             <TextBox.Styles>
                 <Style Selector="TextBox">
@@ -65,7 +65,7 @@
         </TextBox>
         
         <avalonia:MaterialIcon Grid.Row="8" Grid.Column="0" Kind="CompareHorizontal" />
-        <TextBlock Grid.Row="8" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Accuracy_Name}" VerticalAlignment="Center" Margin="5 0 0 0" />
+        <TextBlock Grid.Row="8" Grid.Column="1" Text="{x:Static gbs:RS.AddNewMapPointView_Accuracy_Name}" VerticalAlignment="Center" Margin="5 0 5 0" />
         <TextBox Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding Accuracy}">
             <TextBox.Styles>
                 <Style Selector="TextBox">
