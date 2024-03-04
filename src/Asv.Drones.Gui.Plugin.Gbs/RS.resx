@@ -209,8 +209,8 @@
     <value>Accuracy</value>
   </data>
     <data name="AddNewMapPointViewModel_Accuracy_ValidValue" xml:space="preserve">
-    <value>Accuracy must be greater or equal {0}.</value>
-  </data>
+        <value>Accuracy must be greater than {0}.</value>
+    </data>
     <data name="AddNewMapPointViewModel_Name_ValidValue" xml:space="preserve">
     <value>Name can not be empty</value>
   </data>

@@ -214,8 +214,8 @@
 	  <value>Имя</value>
   </data>
     <data name="AddNewMapPointViewModel_Accuracy_ValidValue" xml:space="preserve">
-	  <value>Точность должна быть больше или равна {0}.</value>
-  </data>
+        <value>Точность должна быть больше {0}.</value>
+    </data>
     <data name="AddNewMapPointViewModel_Name_ValidValue" xml:space="preserve">
 	  <value>Имя не может быть пустым</value>
   </data>
