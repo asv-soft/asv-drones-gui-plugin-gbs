@@ -14,7 +14,7 @@ public class PluginsMarketTreeMenuItem(IConfiguration cfg, ILocalizationService 
     public override string? Name => "Ground base station";
     public override string? Description => "Ground base station settings";
     public override MaterialIconKind Icon => GbsIconHelper.DefaultIcon;
-    public override int Order => 255;
+    public override int Order => 600;
     public override ITreePage? CreatePage(ITreePageContext context)
     {
         return new SavedCoordsViewModel(cfg,loc);

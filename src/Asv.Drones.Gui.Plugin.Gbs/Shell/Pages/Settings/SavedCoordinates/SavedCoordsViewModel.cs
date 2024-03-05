@@ -5,7 +5,6 @@ using Asv.Cfg;
 using Asv.Common;
 using Asv.Drones.Gui.Api;
 using FluentAvalonia.UI.Controls;
-using Material.Icons;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -16,13 +15,13 @@ public class FixedModeConfig
     public double Longitude { get; set; }
     public double Latitude { get; set; }
     public double Altitude { get; set; }
-    public double Accuracy { get; set; }
-    public string Name { get; set; }
+    public double Accuracy { get; set; } = 0.01;
+    public string? Name { get; set; }
 }
 
 public class FixedModeSavedCoords
 {
-    public ObservableCollection<FixedModeConfig> Coords { get; set; } = new();
+    public ObservableCollection<FixedModeConfig> Coords { get; init; } = [];
 }
 
 
@@ -48,7 +47,7 @@ public class SavedCoordsViewModel : ViewModelBase, ITreePage
         AddNewItemCommand = ReactiveCommand.CreateFromTask(AddNewItem).DisposeItWith(Disposable);
 
         var canExecuteRemoveCommand = this.WhenAnyValue(
-            _ => _.SelectedCoordsItem, (selected) => SavedCoordinates.Contains(selected));
+            m => m.SelectedCoordsItem, (selected) => selected != null && SavedCoordinates.Contains(selected));
         
         RemoveItemCommand = ReactiveCommand.CreateFromTask(RemoveItem, canExecuteRemoveCommand).DisposeItWith(Disposable);
     }
@@ -56,11 +55,8 @@ public class SavedCoordsViewModel : ViewModelBase, ITreePage
     private void UpdateValues(IConfiguration configuration)
     {
         var savedCoordsConfig = configuration.Get<FixedModeSavedCoords>();
-        
-        if (savedCoordsConfig.Coords != null)
-        {
-            SavedCoordinates = savedCoordsConfig.Coords;
-        }
+
+        SavedCoordinates = savedCoordsConfig.Coords;
     }
 
     private async Task AddNewItem()
@@ -73,7 +69,7 @@ public class SavedCoordsViewModel : ViewModelBase, ITreePage
             CloseButtonText = RS.SavedCoordsViewModel_AddNewItem_CloseButtonText
         };
 
-        var itemToAdd = SelectedCoordsItem != null ? SelectedCoordsItem : new FixedModeConfig();
+        var itemToAdd = SelectedCoordsItem ?? new FixedModeConfig();
         var vm = new AddNewMapPointViewModel(itemToAdd, _loc, _cfg);
         vm.ApplyDialog(dialog);
         dialog.Content = vm;
@@ -92,9 +88,13 @@ public class SavedCoordsViewModel : ViewModelBase, ITreePage
             CloseButtonText = RS.SavedCoordsViewModel_RemoveItem_CloseButtonText
         };
 
-        var vm = new RemoveMapPointViewModel(SelectedCoordsItem, SavedCoordinates.IndexOf(SelectedCoordsItem), _loc, _cfg);
-        vm.ApplyDialog(dialog);
-        dialog.Content = vm;
+        if (SelectedCoordsItem != null)
+        {
+            var vm = new RemoveMapPointViewModel(SelectedCoordsItem, SavedCoordinates.IndexOf(SelectedCoordsItem), _loc, _cfg);
+            vm.ApplyDialog(dialog);
+            dialog.Content = vm;
+        }
+
         var result = await dialog.ShowAsync();
         UpdateValues(_cfg);
     }
@@ -105,6 +105,5 @@ public class SavedCoordsViewModel : ViewModelBase, ITreePage
     [Reactive]
     public ObservableCollection<FixedModeConfig> SavedCoordinates { get; set; } = new();
     [Reactive] 
-    public FixedModeConfig SelectedCoordsItem { get; set; } = new();
-    
+    public FixedModeConfig? SelectedCoordsItem { get; set; } = new();
 }
