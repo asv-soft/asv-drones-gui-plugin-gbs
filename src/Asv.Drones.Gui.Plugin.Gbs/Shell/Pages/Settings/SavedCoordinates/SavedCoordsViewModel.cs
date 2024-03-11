@@ -25,7 +25,7 @@ public class FixedModeSavedCoords
 }
 
 
-public class SavedCoordsViewModel : ViewModelBase, ITreePage
+public class SavedCoordsViewModel : TreePageViewModel
 {
     private readonly ILocalizationService _loc;
     private readonly IConfiguration _cfg;
