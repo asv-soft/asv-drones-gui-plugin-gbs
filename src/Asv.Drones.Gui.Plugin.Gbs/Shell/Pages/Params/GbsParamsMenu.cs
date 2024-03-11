@@ -5,7 +5,7 @@ using Material.Icons;
 
 namespace Asv.Drones.Gui.Plugin.Gbs;
 
-[Export(nameof(DeviceClass.SdrPayload) ,typeof(IShellMenuItem<IClientDevice>))]
+[Export(nameof(DeviceClass.GbsRtk) ,typeof(IShellMenuItem<IClientDevice>))]
 public class GbsParamsMenu:ShellMenuItem, IShellMenuItem<IClientDevice>
 {
     
