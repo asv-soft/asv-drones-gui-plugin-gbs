@@ -39,7 +39,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             _soundNotification = soundNotification;
             _loc = loc;
             _configuration = configuration;
-        
+            Order = 0;
             Icon = MaterialIconKind.RouterWireless;
             Title = RS.FlightGbsViewModel_Title;
         
