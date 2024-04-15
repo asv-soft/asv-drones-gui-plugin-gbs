@@ -15,7 +15,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
         public LinkQualityGbsRttViewModel(IGbsClientDevice baseStation) : base(baseStation, "quality")
         {
             Order = 1;
-        
+
             BaseStation.Heartbeat.LinkQuality
                 .Subscribe(_ => LinkQuality = _)
                 .DisposeItWith(Disposable);
@@ -26,11 +26,9 @@ namespace Asv.Drones.Gui.Plugin.Gbs
 
             IsMinimizedVisible = true;
         }
-    
-        [Reactive]
-        public double LinkQuality { get; set; }
 
-        [Reactive]
-        public string LinkQualityString { get; set; } = RS.GbsRttItem_ValueNotAvailable;
+        [Reactive] public double LinkQuality { get; set; }
+
+        [Reactive] public string LinkQualityString { get; set; } = RS.GbsRttItem_ValueNotAvailable;
     }
 }
