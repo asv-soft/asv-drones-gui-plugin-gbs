@@ -8,21 +8,17 @@ namespace Asv.Drones.Gui.Plugin.Gbs
     {
         public VisibleSatellitesGbsRttViewModel()
         {
-        
         }
 
         public VisibleSatellitesGbsRttViewModel(IGbsClientDevice baseStation) : base(baseStation, "sat")
         {
             Order = 1;
-        
+
             BaseStation.Gbs.AllSatellites
                 .Subscribe(_ => VisibleSatellites = _.ToString())
                 .DisposeItWith(Disposable);
-
-            IsMinimizedVisible = true;
         }
-    
-        [Reactive]
-        public string VisibleSatellites { get; set; } = RS.GbsRttItem_ValueNotAvailable;
+
+        [Reactive] public string VisibleSatellites { get; set; } = RS.GbsRttItem_ValueNotAvailable;
     }
 }

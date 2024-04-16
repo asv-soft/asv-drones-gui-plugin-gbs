@@ -10,10 +10,10 @@ namespace Asv.Drones.Gui.Plugin.Gbs
         public DGpsRateGbsRttViewModel()
         {
             // DONE: Localize
-            DGpsRate = string.Format(RS.DGpsRateGbsRttViewModel_DGpsRate,_rateValue);
+            DGpsRate = string.Format(RS.DGpsRateGbsRttViewModel_DGpsRate, _rateValue);
         }
 
-        public DGpsRateGbsRttViewModel(IGbsClientDevice baseStation, ILocalizationService localizationService) 
+        public DGpsRateGbsRttViewModel(IGbsClientDevice baseStation, ILocalizationService localizationService)
             : base(baseStation, "dgps")
         {
             Order = 2;
@@ -21,11 +21,12 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             BaseStation.Gbs.DgpsRate
                 .Subscribe(_ => DGpsRate = localizationService.ByteRate.ConvertToStringWithUnits(_))
                 .DisposeItWith(Disposable);
+
+            IsMinimizedVisible = true;
         }
 
         private readonly int _rateValue = 30;
-    
-        [Reactive]
-        public string DGpsRate { get; set; } = RS.GbsRttItem_ValueNotAvailable;
+
+        [Reactive] public string DGpsRate { get; set; } = RS.GbsRttItem_ValueNotAvailable;
     }
 }
