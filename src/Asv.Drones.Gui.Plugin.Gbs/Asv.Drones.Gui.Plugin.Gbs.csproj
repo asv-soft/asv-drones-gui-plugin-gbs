@@ -20,7 +20,7 @@ for displaying and configuring Ground Base Station devices.</Description>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>..\..\..\asv-drones-gui\src\Asv.Drones.Gui.Desktop\bin\Debug\net8.0\asv-data-folder\plugins\Asv.Drones.Gui.Plugin.Gbs\</OutputPath>
+      <OutputPath>..\..\..\asv-drones\src\Asv.Drones.Gui.Desktop\bin\Debug\net8.0\asv-data-folder\plugins\Asv.Drones.Gui.Plugin.Gbs\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
