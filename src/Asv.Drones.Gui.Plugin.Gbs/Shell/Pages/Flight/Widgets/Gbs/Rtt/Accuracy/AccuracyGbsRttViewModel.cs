@@ -17,7 +17,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
         {
             Order = 1;
             BaseStation.Gbs.AccuracyMeter
-                .Subscribe(_ => Accuracy = localizationService.Distance.FromSiToStringWithUnits(_))
+                .Subscribe(v => Accuracy = localizationService.Accuracy.FromSiToStringWithUnits(v))
                 .DisposeItWith(Disposable);
             IsMinimizedVisible = true;
         }
