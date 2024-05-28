@@ -46,7 +46,17 @@ namespace Asv.Drones.Gui.Plugin.Gbs
         
             #region Validation Rules
 
-            this.ValidationRule(x => x.Observation, _ => Convert.ToDouble(_) > 0,
+            this.ValidationRule(x => x.Observation, o =>
+                    {
+                        var isDouble = double.TryParse(o, out double observation);
+
+                        if (!isDouble)
+                        {
+                            return false;
+                        }
+                        
+                        return observation > 0;
+                    },
                     string.Format(RS.AutoModeViewModel_Observation_ValidValue, MinimumObservationTime))
                 .DisposeItWith(Disposable);
 
