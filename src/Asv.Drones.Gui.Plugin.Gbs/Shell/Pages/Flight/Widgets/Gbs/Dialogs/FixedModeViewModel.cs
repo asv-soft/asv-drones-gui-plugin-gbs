@@ -55,9 +55,9 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             #region Validation Rules
 
             this.ValidationRule(x => x.Accuracy,
-                    _ => _loc.Distance.IsValid(MinimumAccuracyDistance, double.MaxValue, _),
+                    _ => _loc.Accuracy.IsValid(MinimumAccuracyDistance, double.MaxValue, _),
                     string.Format(RS.AutoModeViewModel_Accuracy_ValidValue,
-                        _loc.Distance.FromSiToString(MinimumAccuracyDistance)))
+                        _loc.Accuracy.FromSiToString(MinimumAccuracyDistance)))
                 .DisposeItWith(Disposable);
 
             this.ValidationRule(x => x.Latitude, _ => _loc.Latitude.IsValid(MinimumLatitudeValue, MaximumLatitudeValue, _),
@@ -82,7 +82,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             Latitude = _loc.Latitude.FromSiToString(cfg.Latitude);
             Longitude = _loc.Longitude.FromSiToString(cfg.Longitude);
             Altitude = _loc.Altitude.FromSiToString(cfg.Altitude);
-            Accuracy = _loc.Distance.FromSiToString(cfg.Accuracy);
+            Accuracy = _loc.Accuracy.FromSiToString(cfg.Accuracy);
         }
 
         public void ApplyDialog(ContentDialog dialog)
@@ -101,7 +101,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             var lat = _loc.Latitude.ConvertToSi(Latitude);
             var lon = _loc.Longitude.ConvertToSi(Longitude);
             var alt = _loc.Altitude.ConvertToSi(Altitude);
-            var acc = _loc.Distance.ConvertToSi(Accuracy);
+            var acc = _loc.Accuracy.ConvertToSi(Accuracy);
         
             _configuration.Set(new FixedModeConfig
             {
@@ -120,7 +120,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             {
                 await _gbsDevice.Gbs.StartFixedMode(
                     new GeoPoint(lat,lon, alt),
-                    (float)_loc.Distance.ConvertToSi(Accuracy),
+                    (float)_loc.Accuracy.ConvertToSi(Accuracy),
                     cancel);
             }
             catch (Exception e)
@@ -146,7 +146,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             var lat = _loc.Latitude.ConvertToSi(Latitude);
             var lon = _loc.Longitude.ConvertToSi(Longitude);
             var alt = _loc.Altitude.ConvertToSi(Altitude);
-            var acc = _loc.Distance.ConvertToSi(Accuracy);
+            var acc = _loc.Accuracy.ConvertToSi(Accuracy);
             var name = vm.Name;
         
             MapCoords.Add(new FixedModeConfig
@@ -172,7 +172,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
         [Reactive] 
         public FixedModeConfig SelectedConfigItem { get; set; } = new();
 
-        public string AccuracyUnits => _loc.Distance.CurrentUnit.Value.Unit;
+        public string AccuracyUnits => _loc.Accuracy.CurrentUnit.Value.Unit;
         public string LatitudeUnits => _loc.Latitude.CurrentUnit.Value.Unit;
         public string LongitudeUnits => _loc.Longitude.CurrentUnit.Value.Unit;
         public string AltitudeUnits => _loc.Altitude.CurrentUnit.Value.Unit;

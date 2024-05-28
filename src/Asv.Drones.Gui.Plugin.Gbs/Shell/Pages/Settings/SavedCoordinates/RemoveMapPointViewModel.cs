@@ -48,12 +48,12 @@ public class RemoveMapPointViewModel : ViewModelBase
     [Reactive]
     public FixedModeConfig FixedModeConfig { get; set; }
 
-    public string Accuracy => _loc.Distance.FromSiToString(FixedModeConfig.Accuracy);
+    public string Accuracy => _loc.Accuracy.FromSiToString(FixedModeConfig.Accuracy);
     public string Altitude => _loc.Altitude.FromSiToString(FixedModeConfig.Altitude);
     public string Latitude => _loc.Latitude.FromSiToString(FixedModeConfig.Latitude);
     public string Longitude => _loc.Longitude.FromSiToString(FixedModeConfig.Longitude);
     
-    public string AccuracyUnits => _loc.Distance.CurrentUnit.Value.Unit;
+    public string AccuracyUnits => _loc.Accuracy.CurrentUnit.Value.Unit;
     public string LatitudeUnits => _loc.Latitude.CurrentUnit.Value.Unit;
     public string LongitudeUnits => _loc.Longitude.CurrentUnit.Value.Unit;
     public string AltitudeUnits => _loc.Altitude.CurrentUnit.Value.Unit;

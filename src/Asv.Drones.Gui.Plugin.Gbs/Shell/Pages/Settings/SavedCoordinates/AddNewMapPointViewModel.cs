@@ -34,7 +34,7 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
         Latitude = loc.Latitude.FromSiToString(cfg.Latitude);
         Longitude = loc.Longitude.FromSiToString(cfg.Longitude);
         Altitude = loc.Altitude.FromSiToString(cfg.Altitude);
-        Accuracy = loc.Distance.FromSiToString(cfg.Accuracy);
+        Accuracy = loc.Accuracy.FromSiToString(cfg.Accuracy);
         Name = cfg.Name;
         
         #region Validation Rules
@@ -45,9 +45,9 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
             .DisposeItWith(Disposable);
 
         this.ValidationRule(x => x.Accuracy,
-                _ => _loc.Distance.IsValid(MinimumAccuracyDistance, double.MaxValue, _),
+                _ => _loc.Accuracy.IsValid(MinimumAccuracyDistance, double.MaxValue, _),
                 string.Format(RS.AddNewMapPointViewModel_Accuracy_ValidValue,
-                    _loc.Distance.FromSiToString(MinimumAccuracyDistance)))
+                    _loc.Accuracy.FromSiToString(MinimumAccuracyDistance)))
             .DisposeItWith(Disposable);
 
         this.ValidationRule(x => x.Latitude, _ => _loc.Latitude.IsValid(MinimumLatitudeValue, MaximumLatitudeValue, _),
@@ -85,7 +85,7 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
             Latitude = _loc.Latitude.ConvertToSi(Latitude),
             Longitude = _loc.Longitude.ConvertToSi(Longitude),
             Altitude = _loc.Altitude.ConvertToSi(Altitude),
-            Accuracy = _loc.Distance.ConvertToSi(Accuracy),
+            Accuracy = _loc.Accuracy.ConvertToSi(Accuracy),
             Name = Name
         });
         
@@ -102,7 +102,7 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
     public string Accuracy { get; set; } = "0.01";
     [Reactive]
     public string? Name { get; set; }
-    public string AccuracyUnits => _loc.Distance.CurrentUnit.Value.Unit;
+    public string AccuracyUnits => _loc.Accuracy.CurrentUnit.Value.Unit;
     public string LatitudeUnits => _loc.Latitude.CurrentUnit.Value.Unit;
     public string LongitudeUnits => _loc.Longitude.CurrentUnit.Value.Unit;
     public string AltitudeUnits => _loc.Altitude.CurrentUnit.Value.Unit;
