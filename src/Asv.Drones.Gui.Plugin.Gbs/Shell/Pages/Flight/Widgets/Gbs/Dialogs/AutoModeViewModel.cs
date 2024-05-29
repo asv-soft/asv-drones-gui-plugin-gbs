@@ -41,7 +41,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             _loc = loc;
         
             var autoModeConfig = _configuration.Get<AutoModeConfig>();
-            Accuracy = _loc.Distance.FromSiToString(autoModeConfig.Accuracy);
+            Accuracy = _loc.Accuracy.FromSiToString(autoModeConfig.Accuracy);
             Observation = autoModeConfig.Observation.ToString();
         
             #region Validation Rules
@@ -51,9 +51,9 @@ namespace Asv.Drones.Gui.Plugin.Gbs
                 .DisposeItWith(Disposable);
 
             this.ValidationRule(x => x.Accuracy,
-                    _ => _loc.Distance.IsValid(MinimumAccuracyDistance, double.MaxValue, _) && _loc.Distance.ConvertToSi(_) >= MinimumAccuracyDistance,
+                    _ => _loc.Accuracy.IsValid(MinimumAccuracyDistance, double.MaxValue, _) && _loc.Accuracy.ConvertToSi(_) >= MinimumAccuracyDistance,
                     string.Format(RS.AutoModeViewModel_Accuracy_ValidValue,
-                        _loc.Distance.FromSiToString(MinimumAccuracyDistance)))
+                        _loc.Accuracy.FromSiToString(MinimumAccuracyDistance)))
                 .DisposeItWith(Disposable);
 
             #endregion
@@ -71,7 +71,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
         private async Task SetUpAutoMode(CancellationToken cancel)
         {
             if (_gbsDevice == null) return;
-            var acc = _loc.Distance.ConvertToSi(Accuracy);
+            var acc = _loc.Accuracy.ConvertToSi(Accuracy);
             var obs = Convert.ToDouble(Observation);
             _configuration.Set(new AutoModeConfig
             {
@@ -93,6 +93,6 @@ namespace Asv.Drones.Gui.Plugin.Gbs
         [Reactive] public string Observation { get; set; } = "0";
         [Reactive] public string Accuracy { get; set; } = "0";
 
-        public string AccuracyUnits => _loc.Distance.CurrentUnit.Value.Unit;
+        public string AccuracyUnits => _loc.Accuracy.CurrentUnit.Value.Unit;
     }
 }
