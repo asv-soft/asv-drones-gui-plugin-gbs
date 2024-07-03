@@ -276,15 +276,6 @@ namespace Asv.Drones.Gui.Plugin.Gbs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accuracy must be greater or equal {0}..
-        /// </summary>
-        public static string FixedModeViewModel_Accuracy_ValidValue {
-            get {
-                return ResourceManager.GetString("FixedModeViewModel_Accuracy_ValidValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string FixedModeViewModel_SetCoordsName_PrimaryButtonText {

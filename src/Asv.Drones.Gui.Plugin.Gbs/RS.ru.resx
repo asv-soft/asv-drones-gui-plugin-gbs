@@ -32,9 +32,6 @@
     <data name="FixedModeViewModel_StartFailed" xml:space="preserve">
         <value>Ошибка старта Фиксированного режима: {0}</value>
     </data>
-    <data name="FixedModeViewModel_Accuracy_ValidValue" xml:space="preserve">
-        <value>Точность должна быть больше или равна {0}.</value>
-    </data>
     <data name="FlightGbsViewModel_AutoMode_Title" xml:space="preserve">
         <value>Режим Авто</value>
     </data>
@@ -230,7 +227,7 @@
         <value>Параметры</value>
     </data>
     <data name="GbsRttItem_ValueNotAvailable" xml:space="preserve">
-        <value>N\A</value>
+        <value>Н\Д</value>
     </data>
     <data name="SavedCoordsViewModel_AddNewItem_CloseButtonText" xml:space="preserve">
         <value>Отмена</value>
