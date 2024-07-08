@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <ProductVersion>1.0.0</ProductVersion>
-    <ApiVersion>1.0.0</ApiVersion>
+    <ApiVersion>1.0.1</ApiVersion>
     <ReactiveUIVersion>19.5.41</ReactiveUIVersion>
   </PropertyGroup>
 </Project>
