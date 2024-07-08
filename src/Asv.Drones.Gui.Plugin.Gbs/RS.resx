@@ -43,9 +43,6 @@
     <data name="FixedModeViewModel_StartFailed" xml:space="preserve">
         <value>Fixed mode start failed: {0}</value>
     </data>
-    <data name="FixedModeViewModel_Accuracy_ValidValue" xml:space="preserve">
-        <value>Accuracy must be greater or equal {0}.</value>
-    </data>
     <data name="FlightGbsViewModel_AutoMode_Title" xml:space="preserve">
         <value>Auto Mode</value>
     </data>
