@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="Asv.Drones.Gui.Plugin.Gbs.Design/App.axaml" value="Asv.Drones.Gui.Plugin.Gbs.Design/Asv.Drones.Gui.Plugin.Gbs.Design.csproj" />
+        <entry key="Asv.Drones.Gui.Plugin.Gbs/App.axaml" value="Asv.Drones.Gui.Plugin.Gbs.Design/Asv.Drones.Gui.Plugin.Gbs.Design.csproj" />
       </map>
     </option>
   </component>

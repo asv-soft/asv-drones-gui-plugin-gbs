@@ -9,6 +9,6 @@
     <Application.Styles>
         <styling:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True" />
         <avalonia:MaterialIconStyles />
-        <StyleInclude Source="avares://Asv.Drones.Gui.Plugin.FlightDocs/App.axaml" />
+        <StyleInclude Source="avares://Asv.Drones.Gui.Plugin.Gbs/App.axaml" />
     </Application.Styles>
 </Application>
