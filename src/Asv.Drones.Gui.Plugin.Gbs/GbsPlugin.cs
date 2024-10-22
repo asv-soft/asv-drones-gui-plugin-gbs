@@ -1,20 +1,20 @@
 ﻿using System.Composition;
 using Asv.Cfg;
 using Asv.Drones.Gui.Api;
-using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace Asv.Drones.Gui.Plugin.Gbs
 {
     [PluginEntryPoint("GBS")]
     [Shared]
-    public class PluginEntryPoint:IPluginEntryPoint
+    public class GbsPlugin:IPluginEntryPoint
     {
-        Logger _log = LogManager.GetCurrentClassLogger();
+        private ILogger _log;
     
         [ImportingConstructor]
-        public PluginEntryPoint(IConfiguration cfg, IApplicationHost host)
+        public GbsPlugin(ILoggerFactory factory,IConfiguration cfg, IApplicationHost host)
         {
-        
+            _log = factory.CreateLogger<GbsPlugin>();
         }
         public async void Initialize()
         {
