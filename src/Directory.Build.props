@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
     <Nullable>enable</Nullable>
-    <ProductVersion>1.0.1</ProductVersion>
-    <ApiVersion>1.0.1</ApiVersion>
+    <ProductVersion>1.0.2</ProductVersion>
+    <ApiVersion>2.0.0-dev.7</ApiVersion>
     <ReactiveUIVersion>19.5.41</ReactiveUIVersion>
   </PropertyGroup>
 </Project>
