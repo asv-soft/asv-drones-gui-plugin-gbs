@@ -12,15 +12,18 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             BaseStationMode = "Idle";
         }
 
-        public BaseStationModeGbsRttViewModel(IGbsClientDevice baseStation)  : base(baseStation, "mode")
+        public BaseStationModeGbsRttViewModel(IGbsClientDevice baseStation)
+            : base(baseStation, "mode")
         {
             Order = 2;
 
-            BaseStation.Gbs.CustomMode
-                .Subscribe(_ => BaseStationMode = _.ToString().Replace(nameof(AsvGbsCustomMode),""))
+            BaseStation
+                .Gbs.CustomMode.Subscribe(_ =>
+                    BaseStationMode = _.ToString().Replace(nameof(AsvGbsCustomMode), string.Empty)
+                )
                 .DisposeItWith(Disposable);
         }
-    
+
         [Reactive]
         public string BaseStationMode { get; set; } = RS.GbsRttItem_ValueNotAvailable;
     }

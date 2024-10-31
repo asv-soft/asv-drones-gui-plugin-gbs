@@ -7,34 +7,22 @@ namespace Asv.Drones.Gui.Plugin.Gbs
 {
     [PluginEntryPoint("GBS")]
     [Shared]
-    public class GbsPlugin:IPluginEntryPoint
+    public class GbsPlugin : IPluginEntryPoint
     {
         private ILogger _log;
-    
+
         [ImportingConstructor]
-        public GbsPlugin(ILoggerFactory factory,IConfiguration cfg, IApplicationHost host)
+        public GbsPlugin(ILoggerFactory factory, IConfiguration cfg, IApplicationHost host)
         {
             _log = factory.CreateLogger<GbsPlugin>();
         }
-        public async void Initialize()
-        {
-       
 
-        }
+        public async void Initialize() { }
 
-        public void Init()
-        {
-        
-        }
+        public void Init() { }
 
-        public void OnFrameworkInitializationCompleted()
-        {
-        
-        }
+        public void OnFrameworkInitializationCompleted() { }
 
-        public void OnShutdownRequested()
-        {
-        
-        }
+        public void OnShutdownRequested() { }
     }
 }

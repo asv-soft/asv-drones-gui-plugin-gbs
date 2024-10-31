@@ -14,19 +14,22 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
 {
     private readonly IConfiguration _cfg;
     private readonly ILocalizationService _loc;
-    
+
     private const double MinimumAccuracyDistance = 0.01;
     private const int MinimumLatitudeValue = -90;
     private const int MaximumLatitudeValue = 90;
     private const int MinimumLongitudeValue = -180;
     private const int MaximumLongitudeValue = 180;
 
-    public AddNewMapPointViewModel() : base(WellKnownUri.UndefinedUri)
-    {
-    }
-    
+    public AddNewMapPointViewModel()
+        : base(WellKnownUri.UndefinedUri) { }
+
     [ImportingConstructor]
-    public AddNewMapPointViewModel(FixedModeConfig cfg, ILocalizationService loc, IConfiguration configuration) 
+    public AddNewMapPointViewModel(
+        FixedModeConfig cfg,
+        ILocalizationService loc,
+        IConfiguration configuration
+    )
         : base($"{WellKnownUri.ShellPageSettings}.gbs.addnew")
     {
         _cfg = configuration;
@@ -36,34 +39,57 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
         Altitude = loc.Altitude.FromSiToString(cfg.Altitude);
         Accuracy = loc.Accuracy.FromSiToString(cfg.Accuracy);
         Name = cfg.Name;
-        
+
         #region Validation Rules
 
-        this.ValidationRule(x => x.Name,
+        this.ValidationRule(
+                x => x.Name,
                 _ => !string.IsNullOrWhiteSpace(_),
-                RS.AddNewMapPointViewModel_Name_ValidValue)
+                RS.AddNewMapPointViewModel_Name_ValidValue
+            )
             .DisposeItWith(Disposable);
 
-        this.ValidationRule(x => x.Accuracy,
-                _ => _loc.Accuracy.IsValid(MinimumAccuracyDistance, double.MaxValue, _),
-                string.Format(RS.AddNewMapPointViewModel_Accuracy_ValidValue,
-                    _loc.Accuracy.FromSiToString(MinimumAccuracyDistance)))
+        this.ValidationRule(
+                x => x.Accuracy,
+                property =>
+                    property is not null
+                    && _loc.Accuracy.IsValid(MinimumAccuracyDistance, double.MaxValue, property),
+                string.Format(
+                    RS.AddNewMapPointViewModel_Accuracy_ValidValue,
+                    _loc.Accuracy.FromSiToString(MinimumAccuracyDistance)
+                )
+            )
             .DisposeItWith(Disposable);
 
-        this.ValidationRule(x => x.Latitude, _ => _loc.Latitude.IsValid(MinimumLatitudeValue, MaximumLatitudeValue, _),
-                _ => _loc.Latitude.GetErrorMessage(_))
+        this.ValidationRule(
+                x => x.Latitude,
+                property =>
+                    property is not null
+                    && _loc.Latitude.IsValid(MinimumLatitudeValue, MaximumLatitudeValue, property),
+                _ => _loc.Latitude.GetErrorMessage(_)
+            )
             .DisposeItWith(Disposable);
-        
-        
-        this.ValidationRule(x => x.Longitude, _ => _loc.Longitude.IsValid(MinimumLongitudeValue, MaximumLongitudeValue, _),
-                _ => _loc.Longitude.GetErrorMessage(_))
-            .DisposeItWith(Disposable);
-      
 
-        this.ValidationRule(x => x.Altitude, _ => _loc.Altitude.IsValid(_),
-                _ => _loc.Altitude.GetErrorMessage(_))
+        this.ValidationRule(
+                x => x.Longitude,
+                property =>
+                    property is not null
+                    && _loc.Longitude.IsValid(
+                        MinimumLongitudeValue,
+                        MaximumLongitudeValue,
+                        property
+                    ),
+                _ => _loc.Longitude.GetErrorMessage(_)
+            )
             .DisposeItWith(Disposable);
-        
+
+        this.ValidationRule(
+                x => x.Altitude,
+                _ => _loc.Altitude.IsValid(_),
+                _ => _loc.Altitude.GetErrorMessage(_)
+            )
+            .DisposeItWith(Disposable);
+
         #endregion
     }
 
@@ -79,27 +105,33 @@ public class AddNewMapPointViewModel : ViewModelBaseWithValidation
     private void AddItem()
     {
         var coords = _cfg.Get<FixedModeSavedCoords>();
-        
-        coords.Coords.Add(new FixedModeConfig
-        {
-            Latitude = _loc.Latitude.ConvertToSi(Latitude),
-            Longitude = _loc.Longitude.ConvertToSi(Longitude),
-            Altitude = _loc.Altitude.ConvertToSi(Altitude),
-            Accuracy = _loc.Accuracy.ConvertToSi(Accuracy),
-            Name = Name
-        });
-        
+
+        coords.Coords.Add(
+            new FixedModeConfig
+            {
+                Latitude = _loc.Latitude.ConvertToSi(Latitude),
+                Longitude = _loc.Longitude.ConvertToSi(Longitude),
+                Altitude = _loc.Altitude.ConvertToSi(Altitude),
+                Accuracy = _loc.Accuracy.ConvertToSi(Accuracy),
+                Name = Name,
+            }
+        );
+
         _cfg.Set(coords);
     }
-    
+
     [Reactive]
     public string Latitude { get; set; } = "0";
+
     [Reactive]
     public string Longitude { get; set; } = "0";
+
     [Reactive]
     public string Altitude { get; set; } = "0";
+
     [Reactive]
     public string Accuracy { get; set; } = "0.01";
+
     [Reactive]
     public string? Name { get; set; }
     public string AccuracyUnits => _loc.Accuracy.CurrentUnit.Value.Unit;

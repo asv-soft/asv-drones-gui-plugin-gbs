@@ -24,32 +24,36 @@ public class FixedModeSavedCoords
     public ObservableCollection<FixedModeConfig> Coords { get; init; } = [];
 }
 
-
 public class SavedCoordsViewModel : TreePageViewModel
 {
     private readonly ILocalizationService _loc;
     private readonly IConfiguration _cfg;
-    
-    public SavedCoordsViewModel() : base(WellKnownUri.UndefinedUri)
+
+    public SavedCoordsViewModel()
+        : base(WellKnownUri.UndefinedUri)
     {
         DesignTime.ThrowIfNotDesignMode();
     }
 
     [ImportingConstructor]
-    public SavedCoordsViewModel(IConfiguration configuration, ILocalizationService loc) 
+    public SavedCoordsViewModel(IConfiguration configuration, ILocalizationService loc)
         : base($"{WellKnownUri.ShellPageSettings}.gbs.coordinates")
     {
         _loc = loc;
         _cfg = configuration;
-        
+
         UpdateValues(configuration);
 
         AddNewItemCommand = ReactiveCommand.CreateFromTask(AddNewItem).DisposeItWith(Disposable);
 
         var canExecuteRemoveCommand = this.WhenAnyValue(
-            m => m.SelectedCoordsItem, (selected) => selected != null && SavedCoordinates.Contains(selected));
-        
-        RemoveItemCommand = ReactiveCommand.CreateFromTask(RemoveItem, canExecuteRemoveCommand).DisposeItWith(Disposable);
+            m => m.SelectedCoordsItem,
+            (selected) => selected != null && SavedCoordinates.Contains(selected)
+        );
+
+        RemoveItemCommand = ReactiveCommand
+            .CreateFromTask(RemoveItem, canExecuteRemoveCommand)
+            .DisposeItWith(Disposable);
     }
 
     private void UpdateValues(IConfiguration configuration)
@@ -66,7 +70,7 @@ public class SavedCoordsViewModel : TreePageViewModel
             Title = RS.SavedCoordsViewModel_AddNewItem_Title,
             PrimaryButtonText = RS.SavedCoordsViewModel_AddNewItem_PrimaryButtonText,
             IsSecondaryButtonEnabled = true,
-            CloseButtonText = RS.SavedCoordsViewModel_AddNewItem_CloseButtonText
+            CloseButtonText = RS.SavedCoordsViewModel_AddNewItem_CloseButtonText,
         };
 
         var itemToAdd = SelectedCoordsItem ?? new FixedModeConfig();
@@ -74,7 +78,7 @@ public class SavedCoordsViewModel : TreePageViewModel
         vm.ApplyDialog(dialog);
         dialog.Content = vm;
         var result = await dialog.ShowAsync();
-        
+
         UpdateValues(_cfg);
     }
 
@@ -85,12 +89,17 @@ public class SavedCoordsViewModel : TreePageViewModel
             Title = RS.SavedCoordsViewModel_RemoveItem_Title,
             PrimaryButtonText = RS.SavedCoordsViewModel_RemoveItem_PrimaryButtonText,
             IsSecondaryButtonEnabled = true,
-            CloseButtonText = RS.SavedCoordsViewModel_RemoveItem_CloseButtonText
+            CloseButtonText = RS.SavedCoordsViewModel_RemoveItem_CloseButtonText,
         };
 
         if (SelectedCoordsItem != null)
         {
-            var vm = new RemoveMapPointViewModel(SelectedCoordsItem, SavedCoordinates.IndexOf(SelectedCoordsItem), _loc, _cfg);
+            var vm = new RemoveMapPointViewModel(
+                SelectedCoordsItem,
+                SavedCoordinates.IndexOf(SelectedCoordsItem),
+                _loc,
+                _cfg
+            );
             vm.ApplyDialog(dialog);
             dialog.Content = vm;
         }
@@ -98,12 +107,13 @@ public class SavedCoordsViewModel : TreePageViewModel
         var result = await dialog.ShowAsync();
         UpdateValues(_cfg);
     }
-    
+
     public ICommand AddNewItemCommand { get; set; }
     public ICommand? RemoveItemCommand { get; set; }
-    
+
     [Reactive]
     public ObservableCollection<FixedModeConfig> SavedCoordinates { get; set; } = new();
-    [Reactive] 
+
+    [Reactive]
     public FixedModeConfig? SelectedCoordsItem { get; set; } = new();
 }

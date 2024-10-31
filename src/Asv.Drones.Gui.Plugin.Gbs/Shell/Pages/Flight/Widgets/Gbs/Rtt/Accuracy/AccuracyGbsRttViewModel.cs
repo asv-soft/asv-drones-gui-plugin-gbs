@@ -12,16 +12,22 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             Accuracy = "5 m";
         }
 
-        public AccuracyGbsRttViewModel(IGbsClientDevice baseStation, ILocalizationService localizationService) : base(
-            baseStation, "accuracy")
+        public AccuracyGbsRttViewModel(
+            IGbsClientDevice baseStation,
+            ILocalizationService localizationService
+        )
+            : base(baseStation, "accuracy")
         {
             Order = 1;
-            BaseStation.Gbs.AccuracyMeter
-                .Subscribe(v => Accuracy = localizationService.Accuracy.FromSiToStringWithUnits(v))
+            BaseStation
+                .Gbs.AccuracyMeter.Subscribe(v =>
+                    Accuracy = localizationService.Accuracy.FromSiToStringWithUnits(v)
+                )
                 .DisposeItWith(Disposable);
             IsMinimizedVisible = true;
         }
 
-        [Reactive] public string Accuracy { get; set; } = RS.GbsRttItem_ValueNotAvailable;
+        [Reactive]
+        public string Accuracy { get; set; } = RS.GbsRttItem_ValueNotAvailable;
     }
 }

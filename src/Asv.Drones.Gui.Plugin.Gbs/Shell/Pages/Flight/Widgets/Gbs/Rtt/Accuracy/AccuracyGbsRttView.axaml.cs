@@ -5,7 +5,6 @@ using Avalonia.Markup.Xaml;
 namespace Asv.Drones.Gui.Plugin.Gbs
 {
     [ExportView(typeof(AccuracyGbsRttViewModel))]
-    
     public partial class AccuracyGbsRttView : UserControl
     {
         public AccuracyGbsRttView()

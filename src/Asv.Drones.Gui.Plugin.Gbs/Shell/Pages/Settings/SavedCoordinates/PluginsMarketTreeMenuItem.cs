@@ -5,7 +5,7 @@ using Material.Icons;
 
 namespace Asv.Drones.Gui.Plugin.Gbs;
 
-[Export(WellKnownUri.ShellPageSettings,typeof(ITreePageMenuItem))]
+[Export(WellKnownUri.ShellPageSettings, typeof(ITreePageMenuItem))]
 [method: ImportingConstructor]
 public class PluginsMarketTreeMenuItem(IConfiguration cfg, ILocalizationService loc)
     : TreePageMenuItem($"{WellKnownUri.ShellPageSettings}.gbs")
@@ -15,8 +15,9 @@ public class PluginsMarketTreeMenuItem(IConfiguration cfg, ILocalizationService 
     public override string? Description => "Ground base station settings";
     public override MaterialIconKind Icon => GbsIconHelper.DefaultIcon;
     public override int Order => 600;
+
     public override ITreePage? CreatePage(ITreePageContext context)
     {
-        return new SavedCoordsViewModel(cfg,loc);
+        return new SavedCoordsViewModel(cfg, loc);
     }
 }

@@ -7,22 +7,27 @@ using Asv.Mavlink;
 namespace Asv.Drones.Gui.Plugin.Gbs;
 
 [ExportShellPage(Uri)]
-public class GbsParamsViewModel:ParamPageViewModel
+public class GbsParamsViewModel : ParamPageViewModel
 {
     public const string Uri = $"{WellKnownUri.ShellPage}.params-gbs";
-    
-    [ImportingConstructor]
-    public GbsParamsViewModel(IMavlinkDevicesService svc,ILogService log, IConfiguration cfg )
-        :base(Uri,svc, log, cfg)
-    {
-        
-    }
 
-    public override IParamsClientEx? GetParamsClient(IMavlinkDevicesService svc, ushort fullId, DeviceClass @class)
+    [ImportingConstructor]
+    public GbsParamsViewModel(IMavlinkDevicesService svc, ILogService log, IConfiguration cfg)
+        : base(Uri, svc, log, cfg) { }
+
+    public override IParamsClientEx? GetParamsClient(
+        IMavlinkDevicesService svc,
+        ushort fullId,
+        DeviceClass @class
+    )
     {
         var dev = svc.GetGbsByFullId(fullId);
-        if (dev == null) return null;
-        dev.Name.Subscribe(n=>Title = n).DisposeItWith(Disposable);
+        if (dev is null)
+        {
+            return null;
+        }
+
+        dev.Name.Subscribe(n => Title = n).DisposeItWith(Disposable);
         return dev.Params;
     }
 }

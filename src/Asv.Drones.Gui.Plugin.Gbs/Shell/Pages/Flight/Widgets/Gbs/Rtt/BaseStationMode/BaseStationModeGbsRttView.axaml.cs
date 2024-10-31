@@ -5,7 +5,6 @@ using Avalonia.Markup.Xaml;
 namespace Asv.Drones.Gui.Plugin.Gbs
 {
     [ExportView(typeof(BaseStationModeGbsRttViewModel))]
-    
     public partial class BaseStationModeGbsRttView : UserControl
     {
         public BaseStationModeGbsRttView()
