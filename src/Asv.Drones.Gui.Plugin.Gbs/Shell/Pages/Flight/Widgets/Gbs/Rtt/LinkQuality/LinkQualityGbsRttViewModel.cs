@@ -12,23 +12,26 @@ namespace Asv.Drones.Gui.Plugin.Gbs
             LinkQualityString = "30%";
         }
 
-        public LinkQualityGbsRttViewModel(IGbsClientDevice baseStation) : base(baseStation, "quality")
+        public LinkQualityGbsRttViewModel(IGbsClientDevice baseStation)
+            : base(baseStation, "quality")
         {
             Order = 1;
 
-            BaseStation.Heartbeat.LinkQuality
-                .Subscribe(_ => LinkQuality = _)
+            BaseStation
+                .Heartbeat.LinkQuality.Subscribe(_ => LinkQuality = _)
                 .DisposeItWith(Disposable);
 
-            BaseStation.Heartbeat.LinkQuality
-                .Subscribe(_ => LinkQualityString = _.ToString("P0"))
+            BaseStation
+                .Heartbeat.LinkQuality.Subscribe(_ => LinkQualityString = _.ToString("P0"))
                 .DisposeItWith(Disposable);
 
             IsMinimizedVisible = true;
         }
 
-        [Reactive] public double LinkQuality { get; set; }
+        [Reactive]
+        public double LinkQuality { get; set; }
 
-        [Reactive] public string LinkQualityString { get; set; } = RS.GbsRttItem_ValueNotAvailable;
+        [Reactive]
+        public string LinkQualityString { get; set; } = RS.GbsRttItem_ValueNotAvailable;
     }
 }

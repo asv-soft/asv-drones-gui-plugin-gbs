@@ -17,6 +17,24 @@ for displaying and configuring Ground Base Station devices.</Description>
         <PackageLicenseUrl>https://github.com/asv-soft/asv-drones-gui-plugin-gbs?tab=MIT-1-ov-file#readme</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/asv-soft/asv-drones-gui-plugin-gbs</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+        <CodeAnalysisRuleSet>../CodeStyle.ruleset</CodeAnalysisRuleSet>
+        <WarningsAsErrors>
+            CS0169,
+            CS0618,
+            CS1502,
+            CS1503,
+            CS8524,
+            CS8600,
+            CS8601,
+            CS8602,
+            CS8603,
+            CS8604,
+            CS8625,
+            CS8629,
+            CS8762,
+            CA1510,
+            CA1851
+        </WarningsAsErrors>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -26,6 +44,14 @@ for displaying and configuring Ground Base Station devices.</Description>
     <ItemGroup>
         <PackageReference Include="Asv.Drones.Gui.Api" Version="$(ApiVersion)" />
         <PackageReference Include="ReactiveUI.Fody" Version="$(ReactiveUIVersion)" />
+        <PackageReference Include="Roslynator.Analyzers" Version="4.12.9">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>

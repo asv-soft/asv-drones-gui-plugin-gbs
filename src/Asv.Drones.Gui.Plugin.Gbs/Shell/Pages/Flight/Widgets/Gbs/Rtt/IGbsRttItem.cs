@@ -5,7 +5,7 @@ namespace Asv.Drones.Gui.Plugin.Gbs
     /// <summary>
     /// Represents an item in the GbsRtt system.
     /// </summary>
-    public interface IGbsRttItem:IViewModel
+    public interface IGbsRttItem : IViewModel
     {
         /// <summary>
         /// Gets the value of the Order property.

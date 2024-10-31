@@ -27,26 +27,33 @@ namespace Asv.Drones.Gui.Plugin.Gbs
 
         private const double MinimumAccuracyDistance = 0.1;
         private const double MinimumObservationTime = 1;
-    
-        public AutoModeViewModel()
-        {
-        }
-    
+
+        public AutoModeViewModel() { }
+
         [ImportingConstructor]
-        public AutoModeViewModel(IGbsClientDevice gbsDevice, ILogService logService, ILocalizationService loc, IConfiguration configuration, CancellationToken ctx) : this()
+        public AutoModeViewModel(
+            IGbsClientDevice gbsDevice,
+            ILogService logService,
+            ILocalizationService loc,
+            IConfiguration configuration,
+            CancellationToken ctx
+        )
+            : this()
         {
             _gbsDevice = gbsDevice;
             _logService = logService;
             _configuration = configuration;
             _loc = loc;
-        
+
             var autoModeConfig = _configuration.Get<AutoModeConfig>();
             Accuracy = _loc.Accuracy.FromSiToString(autoModeConfig.Accuracy);
             Observation = autoModeConfig.Observation.ToString();
-        
+
             #region Validation Rules
 
-            this.ValidationRule(x => x.Observation, o =>
+            this.ValidationRule(
+                    x => x.Observation,
+                    o =>
                     {
                         var isDouble = double.TryParse(o, out double observation);
 
@@ -54,16 +61,27 @@ namespace Asv.Drones.Gui.Plugin.Gbs
                         {
                             return false;
                         }
-                        
+
                         return observation > 0;
                     },
-                    string.Format(RS.AutoModeViewModel_Observation_ValidValue, MinimumObservationTime))
+                    string.Format(
+                        RS.AutoModeViewModel_Observation_ValidValue,
+                        MinimumObservationTime
+                    )
+                )
                 .DisposeItWith(Disposable);
 
-            this.ValidationRule(x => x.Accuracy,
-                    _ => _loc.Accuracy.IsValid(MinimumAccuracyDistance, double.MaxValue, _) && _loc.Accuracy.ConvertToSi(_) >= MinimumAccuracyDistance,
-                    string.Format(RS.AutoModeViewModel_Accuracy_ValidValue,
-                        _loc.Accuracy.FromSiToString(MinimumAccuracyDistance)))
+            this.ValidationRule(
+                    x => x.Accuracy,
+                    property =>
+                        property is not null
+                        && _loc.Accuracy.IsValid(MinimumAccuracyDistance, double.MaxValue, property)
+                        && _loc.Accuracy.ConvertToSi(property) >= MinimumAccuracyDistance,
+                    string.Format(
+                        RS.AutoModeViewModel_Accuracy_ValidValue,
+                        _loc.Accuracy.FromSiToString(MinimumAccuracyDistance)
+                    )
+                )
                 .DisposeItWith(Disposable);
 
             #endregion
@@ -71,37 +89,45 @@ namespace Asv.Drones.Gui.Plugin.Gbs
 
         public void ApplyDialog(ContentDialog dialog)
         {
-            if (dialog == null) throw new ArgumentNullException(nameof(dialog));
+            ArgumentNullException.ThrowIfNull(dialog);
 
             dialog.PrimaryButtonCommand = ReactiveCommand
-                .CreateFromTask(SetUpAutoMode, this.IsValid().Do(_ => dialog.IsPrimaryButtonEnabled = _))
+                .CreateFromTask(
+                    SetUpAutoMode,
+                    this.IsValid().Do(_ => dialog.IsPrimaryButtonEnabled = _)
+                )
                 .DisposeItWith(Disposable);
         }
 
         private async Task SetUpAutoMode(CancellationToken cancel)
         {
-            if (_gbsDevice == null) return;
+            if (_gbsDevice == null)
+            {
+                return;
+            }
+
             var acc = _loc.Accuracy.ConvertToSi(Accuracy);
             var obs = Convert.ToDouble(Observation);
-            _configuration.Set(new AutoModeConfig
-            {
-                Accuracy = acc,
-                Observation = obs
-            });
+            _configuration.Set(new AutoModeConfig { Accuracy = acc, Observation = obs });
             try
             {
                 await _gbsDevice.Gbs.StartAutoMode((float)obs, (float)acc, cancel);
             }
             catch (Exception e)
             {
-                _logService.Error("", string.Format(RS.AutoModeViewModel_StartFailed, e.Message), e);
+                _logService.Error(
+                    string.Empty,
+                    string.Format(RS.AutoModeViewModel_StartFailed, e.Message),
+                    e
+                );
             }
-        
-        
         }
 
-        [Reactive] public string Observation { get; set; } = "0";
-        [Reactive] public string Accuracy { get; set; } = "0";
+        [Reactive]
+        public string Observation { get; set; } = "0";
+
+        [Reactive]
+        public string Accuracy { get; set; } = "0";
 
         public string AccuracyUnits => _loc.Accuracy.CurrentUnit.Value.Unit;
     }
