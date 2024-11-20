@@ -1,7 +1,7 @@
 ﻿using System.Composition;
 using Asv.Cfg;
 using Asv.Drones.Gui.Api;
-using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace Asv.Drones.Gui.Plugin.Gbs
 {
@@ -9,12 +9,11 @@ namespace Asv.Drones.Gui.Plugin.Gbs
     [Shared]
     public class GbsPlugin:IPluginEntryPoint
     {
-        private ILogger _log;
-    
+        private Logger log = LogManager.GetLogger("GBS");
         [ImportingConstructor]
-        public GbsPlugin(ILoggerFactory factory,IConfiguration cfg, IApplicationHost host)
+        public GbsPlugin(IConfiguration cfg, IApplicationHost host)
         {
-            _log = factory.CreateLogger<GbsPlugin>();
+         
         }
         public async void Initialize()
         {
